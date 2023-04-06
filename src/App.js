@@ -1,40 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import Todo from './Todo';
 import AddTodo from './AddTodo';
-import { Paper, List, Container } from "@material-ui/core";
+import { Paper, List, Container, Grid, Button, AppBar, Toolbar, Typography } from "@material-ui/core";
 import './App.css';
-import { call } from './service/ApiService';
+import { call, signout } from './service/ApiService';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [
-        // { id: 0, title: "Todo 1 ", done: true },
-        // { id: 1, title: "Todo 2 ", done: false },
-      ],
+      items: [],
+      loading: true,
     };
   }
 
   // add 함수 추가
   add = (item) => {
-    // const thisItems = this.state.items;
-    // item.id = "ID-" + thisItems.length;//key를 위한 id 추가
-    // item.done = false;
-    // thisItems.push(item);
-    // this.setState({ items: thisItems });
-    // console.log("items", this.state.items);
     call("/todo", "POST", item).then((response) =>
       this.setState({ items: response.data })
     )
   }
 
   delete = (item) => {
-    // const thisItems = this.state.items;
-    // const newItems = thisItems.filter(e => e.id !== item.id);
-    // this.setState({ items: newItems }, () => {
-    //   console.log("Update Items: ", this.state.items)
-    // });
     call("/todo", "DELETE", item).then((response) =>
       this.setState({ items: response.data }))
   }
@@ -47,7 +34,7 @@ class App extends React.Component {
 
   componentDidMount = () => {
     call("/todo", "GET", null).then((response) =>
-      this.setState({ items: response.data }))
+      this.setState({ items: response.data, loading: false }))
   }
   render() {
     var todoItems = this.state.items.length > 0 && (
@@ -59,12 +46,39 @@ class App extends React.Component {
         </List>
       </Paper>
     )
-    return (
-      <div className="App">
+
+    var navigationBar = (
+      <AppBar position="static">
+        <Toolbar>
+          <Grid justify='space-between' container>
+            <Grid item>
+              <Typography variant='h6'>오늘의 할일</Typography>
+            </Grid>
+            <Grid item>
+              <Button color='inherit' onClick={signout}>logout
+              </Button>
+            </Grid>
+          </Grid>
+        </Toolbar>
+      </AppBar>
+    )
+    var todoListPage = (
+      <div>
+        {navigationBar}
         <Container maxWidth="md">
           <AddTodo add={this.add} />
           <div className="TodoList">{todoItems}</div>
         </Container>
+      </div>
+    )
+    var loadingPage = <h1>로딩중..</h1>
+    var content = loadingPage;
+    if (!this.state.loading) {
+      content = todoListPage;
+    }
+    return (
+      <div className="App">
+        {content}
       </div>
     );
 
