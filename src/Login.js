@@ -14,7 +14,6 @@ class Login extends React.Component {
         const email = data.get("email");
         const password = data.get("password");
 
-        //ApiService의 singin 메소드를 사용해 로그인
         signin({email:email,password: password});
     }
     render() {
@@ -27,7 +26,6 @@ class Login extends React.Component {
                 </Grid>
                 <form noValidate onSubmit={this.handleSubmit}>
                     {" "}
-                    { /* submit 버튼을 클릭하면 handleSubmit 이 실행됨}*/ }
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <TextField
