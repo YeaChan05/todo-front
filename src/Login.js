@@ -15,11 +15,11 @@ class Login extends React.Component {
         const password = data.get("password");
 
         //ApiService의 singin 메소드를 사용해 로그인
-        signin({ email: email, password: password });
+        signin({email:email,password: password});
     }
     render() {
         return (
-            <Container component="main" maxWidth="xs" style={{ marginTop: "8%" }}>
+            <Container component="main" maxWidth="xs" style={{marginTop: "8%"}}>
                 <Grid container spacing={2}>
                     <Typography component="h1" variant="h5">
                         로그인
@@ -27,7 +27,7 @@ class Login extends React.Component {
                 </Grid>
                 <form noValidate onSubmit={this.handleSubmit}>
                     {" "}
-                    { /* submit 버튼을 클릭하면 handleSubmit 이 실행됨}*/}
+                    { /* submit 버튼을 클릭하면 handleSubmit 이 실행됨}*/ }
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <TextField
@@ -38,11 +38,10 @@ class Login extends React.Component {
                                 label="이메일 주소"
                                 name="email"
                                 autoComplete="email"
-                            />
+                                />
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField
-                                type="password"
+                            <TextField 
                                 variant="outlined"
                                 required
                                 fullWidth
@@ -54,12 +53,12 @@ class Login extends React.Component {
                         </Grid>
                         <Grid item xs={12}>
                             <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                color="primary"
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
                             >
-                                로그인
+                            로그인
                             </Button>
                         </Grid>
                         <Link href="/signup" variant="body2">

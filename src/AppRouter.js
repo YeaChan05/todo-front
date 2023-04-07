@@ -6,15 +6,17 @@ import SignUp from "./SignUp";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
+
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
-            {"Copyright ⓒ"}
-            fsofywareengineer, {new Date().getFullYear()}
+            {"Copyright ⓒ "}
+            fsoftwareengineer, {new Date().getFullYear()}
             {"."}
         </Typography>
-    )
+    );
 }
+
 class AppRouter extends React.Component {
     render() {
         return (

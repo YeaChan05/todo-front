@@ -1,5 +1,13 @@
 import React from "react";
-import { Button, TextField, Link, Grid, Container, Typography } from "@material-ui/core";
+import {
+    Button,
+    TextField,
+    Link,
+    Grid,
+    Container,
+    Typography,
+} from "@material-ui/core";
+
 import { signup } from "./service/ApiService";
 
 class SignUp extends React.Component {
@@ -10,20 +18,22 @@ class SignUp extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
+
         const data = new FormData(event.target);
-        const username = data.get('username');
-        const email = data.get('email');
-        const password = data.get('password');
-        signup({ email: email, password: password, username: username }).then(
+        const username = data.get("username");
+        const email = data.get("email");
+        const password = data.get("password");
+        signup({ email: email, username: username, password: password }).then(
             (response) => {
                 window.location.href = "/login";
             }
         );
     }
+
     render() {
         return (
             <Container component="main" maxWidth="xs" style={{ marginTop: "8%" }}>
-                <form novalidate onSubmit={this.handleSubmit}>
+                <form noValidate onSubmit={this.handleSubmit}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <Typography component="h1" variant="h5">
@@ -86,7 +96,8 @@ class SignUp extends React.Component {
                     </Grid>
                 </form>
             </Container>
-        )
+        );
     }
 }
-export default SignUp;
+
+export default SignUp
