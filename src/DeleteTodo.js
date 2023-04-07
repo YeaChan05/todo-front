@@ -8,7 +8,7 @@ class DeleteTodo extends React.Component {
     }
 
     deleteForCompleted = () => {
-        this.deleteForCompleted();
+        this.deleteForCompleted(this.state.item);
     }
 
     render() {
